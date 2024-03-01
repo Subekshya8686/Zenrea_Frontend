@@ -9,7 +9,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
 
 const settings = ["Logout"];
 
@@ -17,20 +16,12 @@ function AppHeader() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-  const navigate = useNavigate();
-
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  const handleLogout = () => {
-    console.log("Logout function called");
-    localStorage.removeItem("accessToken");
-    navigate("/login");
   };
 
   return (
@@ -66,15 +57,7 @@ function AppHeader() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  onClick={() => {
-                    if (setting === "Logout") {
-                      handleLogout();
-                    }
-                    handleCloseUserMenu();
-                  }}
-                >
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
