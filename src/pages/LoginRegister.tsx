@@ -23,7 +23,7 @@ const LoginRegister: React.FC = () => {
   useEffect(() => {
     const storedToken = localStorage.getItem("accessToken");
     if (storedToken) {
-      navigate("/");
+      navigate("/home");
     }
   }, []);
 
